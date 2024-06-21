@@ -1,0 +1,13 @@
+* {
+  /* Bộ chọn chung */
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  /* 1rem = 16px */
+  font-size: 1.6rem;
+  /* font này áp dụng cho toàn trang */
+  font-family: "Sora", sans-serif;
+}
