@@ -1,13 +1,352 @@
 * {
-  /* Bộ chọn chung */
+  /* bộ chọn chung */
+  /* kích thước width, height là của phần tử, tính từ border */
   box-sizing: border-box;
 }
+
+:root {
+  /* mấy cái biến thì viết vào đây*/
+  --header-bg: #10375c;
+}
+
 html {
+  /* 1rem = 10px */
   font-size: 62.5%;
 }
+
 body {
-  /* 1rem = 16px */
+  /* đặt lại kích thước ban đầu là 16px */
   font-size: 1.6rem;
   /* font này áp dụng cho toàn trang */
   font-family: "Sora", sans-serif;
 }
+
+/* COMMON _______________________________________________________________________________________________________ */
+.container {
+  /* chiều rộng chung của trang web */
+  width: 1170px;
+  /* luông chừa mỗi bên 24px */
+  max-width: calc(100% - 48px);
+  /* căn khối này nằm giữa trình duyệt */
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  /* giới hạn chiều rộng tối thiểu cho phần tử */
+  min-width: 205px;
+  /* đặt line-height thay vì height để căn giữa pt lun cho tiện theo chiều dọc ý!!! */
+  line-height: 60px;
+  background: #2e80ce;
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  border-radius: 999px;
+}
+
+.btn:hover {
+  /* di chuột qua nút thì mờ đi 1 chút */
+  opacity: 0.9;
+}
+
+/* tiêu đề chung h2 */
+.section-heading {
+  color: #10375c;
+  font-size: 5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* văn bản mô tả chung */
+.section-desc {
+  margin-top: 18px;
+  color: #575f66;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.67;
+}
+/* control btn */
+.control {
+  display: flex;
+  column-gap: 18px;
+  align-items: center;
+}
+
+.control__btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #575f66;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.control__btn:hover {
+  background: #2e80ce;
+  border-color: #2e80ce;
+  color: #fff;
+}
+
+.control-icon--next {
+  rotate: 180deg;
+}
+
+/* HEADER _________________________________________________________________________________________________*/
+.header {
+  padding-top: 30px;
+  background: var(--header-bg);
+  /* chiều cao tối thiểu bằng chiều cao khung nhìn !! */
+  /* header xuất hiện với kích thước bằng màn hình */
+  min-height: 100vh;
+}
+
+.header-top {
+  /* xoay ngang logo, nav, action */
+  display: flex;
+  /* logo, action sát lề */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__list {
+  /* xoay ngang các navbar item */
+  display: flex;
+}
+
+.header__action--login,
+.navbar__link {
+  /* các nút cách nhau 42px ( vậy thì 2 bên sẽ là 21px) */
+  /* nên dùng padding trên dưới cho nút, để người dùng di chuột gần tới nó đã ăn rùi */
+  padding: 8px 21px;
+  color: #c9d2da;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  /* đối với nút khi hover hoặc active, ko sd font-weight để làm tăng độ đậm của chữ
+  => điều này gây giật màn hình
+  => sử dụng text-shadow tối ưu hơn */
+  text-shadow: 1px 0 0 currentColor;
+  color: #fff;
+}
+
+.navbar__link--active::before {
+  /* sử dụng pt giả để tạo dấu chấm  */
+  /* content là thuộc tính bắt buộc phải có khi sử dụng phần tử giả */
+  content: "";
+  /* thường thì pt này có display: inline nên ko thể xét width, height được */
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  /* định vị dấu chấm nha!!! */
+  top: -3px;
+  position: relative;
+  right: 8px;
+}
+
+.header__action--signup {
+  /* đặt lại sự khác biệt với nút btn */
+  min-width: 144px;
+  line-height: 44px;
+  font-size: 1.6rem;
+}
+
+.header__action--login {
+  margin-right: 7px;
+}
+/* HERO _________________________________________________________________________________________________*/
+.hero {
+  display: flex;
+  padding-top: 76px;
+  align-items: center;
+}
+
+.hero__content {
+  width: 44%;
+}
+
+.hero__media {
+  flex: 1;
+}
+
+.hero__heading {
+  color: #fff;
+  font-size: 7rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -1.4px;
+}
+
+.hero__desc {
+  margin-top: 22px;
+  color: #c9d2da;
+  font-family: Sora;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.67;
+}
+
+.hero__row {
+  /* theo mặc định thì 2 thẻ inline nằm trên cùng 1 hàng sẽ có
+  một khoảng cách nhỏ giữa chúng
+  để bỏ đi thì ta dùng display:flex
+  => sử dụng gap để đặt kc giữa chúng theo thiết kế */
+  margin-top: 38px;
+  display: flex;
+  align-items: center;
+  column-gap: 38px;
+}
+
+.hero__phone {
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 1.67;
+}
+
+.hero__images {
+  display: flex;
+  /* căn giữa 2 ảnh theo chiều dọc */
+  align-items: center;
+  /* dồn ảnh về cuối box chứa */
+  justify-content: flex-end;
+}
+
+.hero__img {
+  border-radius: 6px;
+  /* giúp ảnh ko bị méo */
+  object-fit: cover;
+}
+
+.hero__img--large {
+  width: 330px;
+  height: 540px;
+  /* dịch qua trái 6px */
+  margin-right: -6px;
+  /* làm cho ảnh nằm trên ( ảnh này nằm dưới do được viết trước) */
+  z-index: 1;
+}
+
+.hero__img--small {
+  width: 210px;
+  height: 410px;
+}
+/* SERVICE _________________________________________________________________________________________________*/
+.service {
+  /* theo thiết kế, để padding thay vi margin để có thể đổ màu nền */
+  padding: 170px 0;
+  background: #fff;
+}
+
+.service__heading,
+.service__desc {
+  text-align: center;
+}
+
+.service__desc {
+  width: 468px;
+  /* căn giữa đối với box bị giới hạn kích thước */
+  margin: 18px auto 0;
+}
+
+.service__row {
+  margin-top: 70px;
+  display: flex;
+  /* sát lề */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service__img {
+  /* kthuoc theo thiết kế */
+  width: 570px;
+  height: 570px;
+  border-radius: 12px;
+  /* làm cho ảnh ko bị méo */
+  object-fit: cover;
+}
+
+.service-item {
+  /* đệm xung quanh */
+  padding: 21px;
+  /* xoay ngang khối icon và body */
+  display: flex;
+  /* giới hạn độ rộng, ko giới hạn chiều cao vì có thể thêm nội dung sau đó */
+  width: 470px;
+  border-radius: 10px;
+  background: #fff;
+  /* làm cho quá trình hover kết thúc chậm hơn */
+  transition: 0.25s;
+}
+
+.service-item:hover {
+  /* các item sát nhau, làm mất một phần bóng đổ 
+  dùng position để pt nằm trên 1 luồng khác,
+  nằm trên luồng thông thường
+  => không làm mất bóng đổ*/
+  position: relative;
+  /* độ bóng cho item khi di chuột qua */
+  box-shadow: 0px 14px 28px 0px rgba(0, 0, 0, 0.5);
+}
+/* CÁI NÀY QUAN TRỌNG NHA */
+/* KHI HOVER QUA ITEM => ICON RĂNG ĐỔI MÀU */
+.service-item:hover .service-item__icon {
+  color: #fff;
+  background: #2e80ce;
+}
+.service-item__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: #eff6fd;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.05);
+  /* căn giữa răng trong box chứa nó */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* xd khả năng co dãn của item =0 */
+  flex-shrink: 0;
+  /* cách phần body  */
+  margin-right: 19px;
+  /* biển đổi màu từ từ */
+  transition: 0.25s;
+}
+
+.service-item__heading {
+  color: #10375c;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.service-item__desc {
+  margin-top: 8px;
+  color: #575f66;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.service__btn {
+  margin-top: 55px;
+}
+
+/* HEADER _________________________________________________________________________________________________*/
