@@ -22,6 +22,15 @@ body {
 }
 
 /* COMMON _______________________________________________________________________________________________________ */
+/* đối với các thẻ này ko ăn theo thuộc tính của thẻ cha nó
+=> quay định lại để kế thừa font và font size */
+textarea,
+button,
+select,
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
 .container {
   /* chiều rộng chung của trang web */
   width: 1170px;
@@ -74,21 +83,26 @@ a {
 }
 /* control btn */
 .control {
+  /* xoay ngang 2 nút ra */
   display: flex;
   column-gap: 18px;
   align-items: center;
 }
 
 .control__btn {
+  /* làm hình tròn cho nút */
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  /* căn giữa */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #575f66;
   background: #fff;
+  /* làm hình bàn tay cho button => tại ko có sẵn */
   cursor: pointer;
+  /* màn chậm lại hiệu ứng */
   transition: 0.25s;
 }
 
@@ -99,6 +113,7 @@ a {
 }
 
 .control-icon--next {
+  /* xoay chiều mũi tên => tạo nút next */
   rotate: 180deg;
 }
 
@@ -349,4 +364,536 @@ a {
   margin-top: 55px;
 }
 
-/* HEADER _________________________________________________________________________________________________*/
+/* WORK _________________________________________________________________________________________________*/
+.work {
+  background: #f6fbff;
+  padding: 100px 0;
+}
+
+.work__desc {
+  width: 468px;
+}
+
+.work__list {
+  margin-top: 86px;
+  /* bấm ctrl + g để hiện thị grid trên figma */
+  display: grid;
+  /* chia 3 cột có kt bằng nhau */
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 30px;
+}
+
+.work-item {
+  /* ko cần xd width, height vì grid đã chia sẵn rùi */
+  padding: 43px;
+  border-radius: 4px;
+  background: #fff;
+  border: 16px solid #eaf6ff;
+  /* chuyển trạng thái ko bị biến đổi đột ngột */
+  transition: 0.25s;
+}
+
+.work-item:hover {
+  border-color: #2e80ce;
+  /* khi hover ảnh dịch lên trên 16px theo trục y */
+  transform: translateY(-16px);
+}
+
+.work-item__heading {
+  margin-top: 18px;
+  color: #10375c;
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.work-item__desc {
+  margin-top: 28px;
+  color: #575f66;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.work-item__more {
+  /* đối vs thẻ inline thì ko xét đc margin top/bottom
+  => chuyển nó thành inline-block */
+  display: inline-block;
+  margin-top: 18px;
+  color: #2e80ce;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+/* ABOUT _________________________________________________________________________________________________*/
+.about {
+  /* khối này có padding trên dưới là 170px
+  => để padding là 85px thui để khối sau cũng padding là 85px
+  => đảm bảo khoảng cách giữa 2 khối, ND ko dính sát vào lề */
+  margin-top: 85px;
+  /* 121px +85px => bù cho ảnh nhỏ dịch xuống dưới chiếm chỗ */
+  padding: 85px 0 206px;
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about__media {
+  width: 49%;
+}
+
+.about-content {
+  width: 40%;
+}
+
+.about__img {
+  position: relative;
+}
+
+.about__img--big {
+  display: flex;
+  object-fit: cover;
+  width: 512px;
+  height: 370px;
+  border-radius: 6px;
+  box-shadow: 0px 14px 28px 0px rgba(0, 0, 0, 0.07);
+}
+
+.about__img--small {
+  /* định vị ảnh theo about__img */
+  position: absolute;
+  top: 121px;
+  left: 238px;
+  object-fit: cover;
+  width: 332px;
+  height: 370px;
+  border-radius: 6px;
+}
+
+.about-content__btn {
+  margin-top: 38px;
+}
+/* TEAM_________________________________________________________________________________________________*/
+.team {
+  /* cách khối trên 170px nhưng khối trên đã đệm 85px
+  => chỉ cần đệm 85px nữa là đủ */
+  padding: 85px 0;
+}
+
+.team-header {
+  /* căn giữa trang */
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* nút phần team header */
+.team__cta {
+  margin-top: 38px;
+}
+
+/* sử dụng layout grid để chia cột trong trường hợp này
+nhấn ctrl + g
+=> các item chiếm số cột bằng nhau */
+.team__list {
+  margin-top: 70px;
+  column-gap: 30px;
+  display: grid;
+  /* chia 4 cột có kích thước bằng nhau */
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* lấy chiều cao ảnh thôi vì chiều rộng đã chia bởi grid  */
+.team-item__thumb {
+  height: 290px;
+  /* xd chiều rộng khớp với chiều cao ( có thể co giãn được) */
+  max-width: 100%;
+  /* hình ảnh vừa với box chứa nó */
+  object-fit: cover;
+  /* thẻ img là thẻ inline
+  => nó sẽ chừa ra 1 khoảng nhỏ xíu để vừa cho các ký tự như y, g...
+  => để loại bỏ điều này, ta sử dụng display: block để thay thế */
+  display: block;
+  /* làm cho ảnh chuyển qua hiệu ứng khác 1 cách từ từ, ko đột ngột */
+  transition: 0.5s;
+}
+
+/* nền bên ngoài hình ảnh */
+.team-item__img-bg {
+  border-radius: 6px;
+  background: #eaf6ff;
+  padding-top: 28px;
+  /* ẩn ND thừa vượt khỏi box chứa */
+  overflow: hidden;
+}
+
+.team-item:hover .team-item__thumb {
+  /* khi hover qua item => ảnh sẽ phóng to hơn một chút */
+  transform: scale(1.1);
+}
+
+.team-item__name {
+  margin-top: 12px;
+  color: #10375c;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 1.75;
+}
+
+.team-item__desc {
+  color: #575f66;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.86;
+}
+
+.team__control {
+  margin-top: 38px;
+  justify-content: center;
+}
+/* MOBILE INSTALL _________________________________________________________________________________________________*/
+.install__inner {
+  /* đo ảnh màu xanh đến khối bên trên là 265px
+  => lấy 265px -85px của khối bên trên là ra 180px
+  => cách bên dưới thêm 85px (170px/2) */
+  margin: 180px 0 85px;
+  /* Để img định vị theo */
+  position: relative;
+  /* xoay ngang ảnh với phần content */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* có đệm 2 bên là 70px */
+  padding: 0 70px;
+  /* chiều cao phần màu xanh */
+  height: 427px;
+  border-radius: 4px;
+  background: #2e80ce;
+}
+
+.install__img {
+  /* định vị theo bg inner */
+  position: absolute;
+  bottom: 0;
+  width: 284px;
+  height: 522px;
+  object-fit: cover;
+}
+
+.install__content {
+  /* kích thước phần ND tối thiểu */
+  min-width: 586px;
+}
+
+.install__heading {
+  /* code riêng so với section-heading */
+  color: #fff;
+  max-width: 489px;
+}
+
+.install__desc {
+  margin-top: 18px;
+  max-width: 586px;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.67;
+}
+.install__row {
+  margin-top: 38px;
+  display: flex;
+  /* kc cách giữa 2 pt con */
+  column-gap: 28px;
+  align-items: center;
+}
+/*BLOG _________________________________________________________________________________________________*/
+.blog {
+  padding: 85px 0;
+  background: #fff;
+}
+
+.blog__inner {
+  /* xoay ngang hai khối trái phải */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog__content {
+  /* đo đi nha */
+  width: 40%;
+}
+
+.blog__heading {
+  /* đo đi nha */
+  max-width: 470px;
+}
+
+.blog__more {
+  margin-top: 28px;
+  /* nhớ nha!!
+  THẺ INLINE KHÔNG MARGIN-TOP ĐƯỢC
+  => nên cần đổi sang inline-block */
+  display: inline-block;
+  color: #10375c;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.56;
+  text-decoration-line: underline;
+  /* dấu gạch chân dưới chữ g */
+  text-underline-offset: 5px;
+}
+
+.blog__control {
+  margin-top: 28px;
+  /* cái code chung thì nó căn giữa cần sửa lại */
+  justify-content: flex-start;
+}
+
+.blog__list {
+  /* mở grid lên coi nhé!! */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+}
+
+.blog-item {
+  /* ko đặt chiều cao nhé, nó có thể giãn da khi thêm ND */
+  max-width: 270px;
+  border-radius: 12px;
+  border: 1px solid #e8ebee;
+  background: #fff;
+  /* Ẩn ND vượt khỏi box chứa */
+  overflow: hidden;
+  /* làm chậm lại quá trình chuyển hiệu ứng */
+  transition: 0.5s;
+}
+
+.blog-item:hover {
+  /* khi hover vào có đổ bóng */
+  box-shadow: 0px 18px 50px 0px rgba(0, 0, 0, 0.05);
+  border-color: transparent;
+}
+
+.blog-item:hover .blog-item__thumb {
+  /* khi hover vào item thì tăng kt ảnh lên 1 chút */
+  transform: scale(1.1);
+}
+
+.blog-item__thumb {
+  width: 270px;
+  height: 172px;
+  border-radius: 12px 12px 0px 0px;
+  /* vừa hình ảnh */
+  object-fit: cover;
+  /* làm hiệu ứng chậm lại */
+  transition: 0.25s;
+}
+
+.blog-item__wrap {
+  /* pt này bao quanh img=> 
+  giới hạn kt cho nó để ảnh khi phóng to lên ko vượt quá box chứa */
+  height: 172px;
+  overflow: hidden;
+}
+
+.blog-item__body {
+  /* đo đi nhé */
+  padding: 18px 22px;
+}
+
+.blog-item__heading {
+  color: #10375c;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.62;
+}
+
+.blog-item__desc {
+  margin-top: 10px;
+  color: #575f66;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.72;
+}
+
+.blog-item__more {
+  /* thẻ a là inline thì ko mt đc  */
+  display: inline-block;
+  margin-top: 12px;
+  color: #10375c;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.blog-item__more:hover {
+  color: #2e80ce;
+}
+/*AAPOINTMENT _________________________________________________________________________________________________*/
+.appointment {
+  /* sd margin tại khối này có padding sẵn rồi */
+  margin-top: 85px;
+}
+
+.appointment__inner {
+  /* thiết kế */
+  padding: 100px 178px;
+  background: #f6fbff;
+  /* căn text giữa box chứa */
+  text-align: center;
+}
+
+.appointment__heading::after {
+  /* tạo gạch ngang */
+  content: "";
+  display: block;
+  width: 136px;
+  height: 2px;
+  background: #2e80ce;
+  margin: 18px auto 0;
+}
+
+.appointment__desc {
+  /* giới hạn kt nên sd margin để căn giữa */
+  margin: 18px auto 0;
+  max-width: 617px;
+}
+
+.appointment__btn {
+  margin-top: 38px;
+}
+/*FOOTER _________________________________________________________________________________________________*/
+.footer {
+  margin-top: 170px;
+  padding-top: 100px;
+  background: #10375c;
+  font-family: "Open Sans", sans-serif;
+}
+
+.footer__top {
+  /* chia cột theo grid */
+  display: grid;
+  grid-template-columns: 1fr 0.4fr 0.4fr 1fr;
+  column-gap: 78px;
+}
+
+.footer__desc {
+  margin-top: 21px;
+  color: #a9b3bb;
+  font-size: 1.6rem;
+  line-height: 1.75;
+}
+
+.footer__heading {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+.footer__list {
+  margin: 20px 0 28px;
+}
+
+.footer__link {
+  color: #a9b3bb;
+  font-size: 1.4rem;
+  line-height: 1.86;
+  /* ko xuống hàng */
+  white-space: nowrap;
+}
+
+.footer__link:hover {
+  /* di chuột vào link thì gạch chân */
+  text-decoration: underline;
+}
+
+.footer__item {
+  margin-bottom: 10px;
+}
+
+.footer__social {
+  margin: 20px 0 28px;
+  display: flex;
+  column-gap: 10px;
+}
+
+.footer__social-btn {
+  /* căn giữa icon */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* khi chưa hover
+  => nền trắng, chữ xanh
+  => nhớ sd current Color cho ảnh svg */
+  background: #fff;
+  color: #2e80ce;
+  /* ảnh ko bị chuyển hiệu ứng đột ngột */
+  transition: 0.25s;
+}
+
+.footer__social-btn:hover {
+  background: #2e80ce;
+  color: #fff;
+}
+
+.footer-form {
+  display: flex;
+  column-gap: 12px;
+  margin-top: 10px;
+}
+
+.footer-form__input {
+  width: 212px;
+  height: 46px;
+  border-radius: 4px;
+  border: 1px solid #406181;
+  /* trong suốt để nhìn thấy màu nền */
+  background: transparent;
+  outline: none;
+  /* chữ để nhập liệu là màu trắng */
+  color: #fff;
+}
+
+.footer-form__input::placeholder {
+  color: #9ca8b1;
+  font-size: 1.4rem;
+  line-height: 1.86;
+}
+
+.footer-form__submit {
+  width: 108px;
+  height: 46px;
+  border-radius: 4px;
+  background: #2e80ce;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.86;
+  border: none;
+}
+
+.footer-form__submit:hover {
+  /* hover qua nút submit thì hiện bài tay và giảm độ mờ */
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.footer__copyright {
+  /* tạo đường kẻ */
+  border-top: 1px solid #406181;
+}
+
+.footer__copyright-text {
+  padding: 28px 0 42px;
+  color: #aab3ba;
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1.86;
+}
